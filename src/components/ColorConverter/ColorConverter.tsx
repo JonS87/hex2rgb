@@ -22,22 +22,20 @@ export const ColorConverter: React.FC = () => {
       if (/^#[0-9A-F]{6}$/i.test(color.hex)) {
         const rgb = hexToRgb(color.hex);
         setColor({ hex: color.hex, rgb, error: false });
+        setBackgroundColor(color.hex)
       } else {
         setColor({ hex: color.hex, rgb: '255, 0, 0', error: true });
+        setBackgroundColor(`rgb(${color.rgb})`)
       }
+    } else if (color.hex.length > 7) {
+      setColor({ hex: color.hex, rgb: '255, 0, 0', error: true });
+      setBackgroundColor(`rgb(${color.rgb})`)
     } else {
-      setColor({ hex: color.hex, rgb: color.rgb, error: false });
+      setColor({ hex: color.hex, rgb: '', error: false });
+      setBackgroundColor('white')
     }
   }, [color.hex]);
 
-  useEffect(() => {
-    if (color.error) {
-      setBackgroundColor(`rgb(${color.rgb})`)
-    } else {
-      setBackgroundColor(color.hex || 'white')
-    }
-  }, [color]);
-  
   const hexToRgb = (hex: string): string => {
     const bigint = parseInt(hex.slice(1), 16);
     const r = (bigint >> 16) & 255;

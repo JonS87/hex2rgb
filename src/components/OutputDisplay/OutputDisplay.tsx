@@ -7,11 +7,9 @@ interface OutputDisplayProps {
 }
 
 export const OutputDisplay: React.FC<OutputDisplayProps> = ({ color }) => {
-  // const backgroundColor = color.error ? 'red' : color.hex;
-  // style={{ backgroundColor }}
   return (
-    <div className={styles['background']} > 
-      {color.error ? 'Ошибка!' : color.rgb ? `RGB(${color.rgb})` : `${color.rgb}`}
+    <div className={styles['background']} >
+      {color.error ? 'Ошибка!' : color.rgb ? `RGB(${color.rgb})` : ``}
     </div>
   );
 };
